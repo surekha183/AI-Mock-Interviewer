@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}
+Upload Resume
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white">
+
+                    <h3 class="mb-0">
+                        📄 Upload Your Resume
+                    </h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    <p class="text-muted">
+
+                        Upload your latest resume. Our AI will automatically extract:
+
+                    </p>
+
+                    <ul>
+
+                        <li>Skills</li>
+                        <li>Projects</li>
+                        <li>Education</li>
+                        <li>Certifications</li>
+
+                    </ul>
+
+                    <form method="POST" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+
+                            {{ form.resume.label_tag }}
+
+                            {{ form.resume }}
+
+                        </div>
+
+                        <button
+                            class="btn btn-primary btn-lg"
+                            type="submit">
+
+                            Upload & Analyze Resume
+
+                        </button>
+
+                    </form>
+
+                    {% if resume %}
+
+                    <hr>
+
+                    <h5 class="mt-4">
+
+                        Current Resume
+
+                    </h5>
+
+                    <a
+                        href="{{ resume.resume.url }}"
+                        target="_blank"
+                        class="btn btn-outline-secondary">
+
+                        View Resume
+
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

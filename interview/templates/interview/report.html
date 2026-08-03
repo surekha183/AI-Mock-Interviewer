@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block title %}
+Interview Report
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="text-center mb-5">
+
+        <h1 class="text-primary">
+            📊 AI Interview Report
+        </h1>
+
+        <p class="text-muted">
+            Interview with AI
+        </p>
+
+    </div>
+
+    <!-- Overall Score -->
+
+    <div class="card shadow mb-4">
+
+        <div class="card-body text-center">
+
+            <h2>Overall Score</h2>
+
+            <h1 class="display-2 text-success">
+
+                {{ report.overall_score }}%
+
+            </h1>
+
+        </div>
+
+    </div>
+
+    <!-- Scores -->
+
+    <div class="row">
+
+        <div class="col-md-4">
+
+            <div class="card shadow text-center">
+
+                <div class="card-body">
+
+                    <h5>💻 Technical</h5>
+
+                    <h2>{{ report.technical_score }}%</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow text-center">
+
+                <div class="card-body">
+
+                    <h5>🗣 Communication</h5>
+
+                    <h2>{{ report.communication_score }}%</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow text-center">
+
+                <div class="card-body">
+
+                    <h5>💪 Confidence</h5>
+
+                    <h2>{{ report.confidence_score }}%</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Strengths -->
+
+    <div class="card shadow mt-4">
+
+        <div class="card-header bg-success text-white">
+
+            <h4>⭐ Strengths</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <pre style="white-space:pre-wrap;border:none;background:white;">{{ report.strengths }}</pre>
+
+        </div>
+
+    </div>
+
+    <!-- Weaknesses -->
+
+    <div class="card shadow mt-4">
+
+        <div class="card-header bg-danger text-white">
+
+            <h4>⚠ Areas to Improve</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <pre style="white-space:pre-wrap;border:none;background:white;">{{ report.weaknesses }}</pre>
+
+        </div>
+
+    </div>
+
+    <!-- Suggestions -->
+
+    <div class="card shadow mt-4">
+
+        <div class="card-header bg-info text-white">
+
+            <h4>📚 Suggestions</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <pre style="white-space:pre-wrap;border:none;background:white;">{{ report.suggestions }}</pre>
+
+        </div>
+
+    </div>
+
+    <!-- Buttons -->
+
+    <div class="text-center mt-5">
+
+        <a href="{% url 'dashboard' %}"
+           class="btn btn-primary btn-lg">
+
+            🏠 Back to Dashboard
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

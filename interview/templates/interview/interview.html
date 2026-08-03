@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+
+            Question {{ number }} of {{ total }}
+
+        </div>
+
+        <div class="card-body">
+
+            <h4>
+
+                {{ question }}
+
+            </h4>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <textarea
+                    class="form-control"
+                    rows="8"
+                    name="answer"
+                    required></textarea>
+
+                <br>
+
+                <button class="btn btn-primary">
+
+                    Next Question
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

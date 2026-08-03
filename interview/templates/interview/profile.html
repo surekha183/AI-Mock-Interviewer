@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <h2>👤 My Profile</h2>
+
+            <hr>
+
+            <p><strong>Username:</strong> {{ user.username }}</p>
+
+            <p><strong>Email:</strong> {{ user.email }}</p>
+
+            {% if resume %}
+                <p><strong>Resume:</strong> ✅ Uploaded</p>
+                <p><strong>Uploaded On:</strong> {{ resume.uploaded_at }}</p>
+            {% else %}
+                <p><strong>Resume:</strong> ❌ Not Uploaded</p>
+            {% endif %}
+
+            <hr>
+
+            <h4>Interview Statistics</h4>
+
+            <p>
+                <strong>Total Interviews:</strong>
+                {{ total_interviews }}
+            </p>
+
+            <p>
+                <strong>Average Score:</strong>
+                {{ average_score }}%
+            </p>
+
+            <p>
+                <strong>Highest Score:</strong>
+                {{ highest_score }}%
+            </p>
+
+            <hr>
+
+            <a href="{% url 'dashboard' %}"
+               class="btn btn-primary">
+
+                Back to Dashboard
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

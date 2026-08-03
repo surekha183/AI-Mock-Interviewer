@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="mb-5">
+        Welcome, {{ user.username }} 👋
+    </h2>
+
+    <div class="row">
+
+        <!-- Resume Status -->
+
+        <div class="col-md-6">
+
+            <div class="card shadow mb-4">
+
+                <div class="card-body">
+
+                    <h3>Resume Status</h3>
+
+                    <hr>
+
+                    {% if resume %}
+
+                        <h5 class="text-success">
+                            ✔ Resume Uploaded Successfully
+                        </h5>
+
+                        <p>
+                            <strong>Uploaded:</strong>
+                            {{ resume.uploaded_at }}
+                        </p>
+
+                        <a href="{{ resume.resume.url }}"
+                           target="_blank"
+                           class="btn btn-info">
+
+                            📄 View Resume
+
+                        </a>
+
+                        <a href="/resume/upload/"
+                           class="btn btn-warning">
+
+                            🔄 Re-upload Resume
+
+                        </a>
+
+                    {% else %}
+
+                        <h5 class="text-danger">
+                            ❌ No Resume Uploaded
+                        </h5>
+
+                        <a href="/resume/upload/"
+                           class="btn btn-primary">
+
+                            Upload Resume
+
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Quick Actions -->
+
+        <div class="col-md-6">
+
+            <div class="card shadow mb-4">
+
+                <div class="card-body">
+
+                    <h3>Quick Actions</h3>
+
+                    <hr>
+
+                    <a href="/interview/"
+                       class="btn btn-success w-100 mb-3">
+
+                        🚀 Start Interview
+
+                    </a>
+
+                    <a href="{% url 'previous_reports' %}"
+                        class="btn btn-info w-100 mb-3">
+
+                        📊 Previous Reports
+
+                    </a>
+
+                    <a href="{% url 'profile' %}"
+                       class="btn btn-secondary w-100">
+
+                      👤 Profile
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% if resume %}
+
+    <div class="card shadow mt-4">
+
+        <div class="card-header bg-primary text-white">
+
+            <h3 class="mb-0">
+
+                AI Resume Analysis
+
+            </h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <!-- Skills -->
+
+            <h4>Skills</h4>
+
+            <ul>
+
+                {% for skill in resume.skills.splitlines %}
+
+                    {% if skill %}
+
+                        <li>{{ skill }}</li>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </ul>
+
+            <hr>
+
+            <!-- Projects -->
+
+            <h4>Projects</h4>
+
+            <ul>
+
+                {% for project in resume.projects.splitlines %}
+
+                    {% if project %}
+
+                        <li>{{ project }}</li>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </ul>
+
+            <hr>
+
+            <!-- Education -->
+
+            <h4>Education</h4>
+
+            <ul>
+
+                {% for education in resume.education.splitlines %}
+
+                    {% if education %}
+
+                        <li>{{ education }}</li>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </ul>
+
+            <hr>
+
+            <!-- Certifications -->
+
+            <h4>Certifications</h4>
+
+            <ul>
+
+                {% for certification in resume.certifications.splitlines %}
+
+                    {% if certification %}
+
+                        <li>{{ certification }}</li>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

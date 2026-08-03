@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}
+Previous Reports
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">
+        📊 Previous Interview Reports
+    </h2>
+
+    {% if reports %}
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover shadow">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Role</th>
+                        <th>Overall</th>
+                        <th>Technical</th>
+                        <th>Communication</th>
+                        <th>Confidence</th>
+                        <th>View Report</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for report in reports %}
+
+                    <tr>
+
+                        <td>
+                            {{ report.generated_at|date:"d M Y H:i" }}
+                        </td>
+
+                        <td>
+                            {{ report.interview.role }}
+                        </td>
+
+                        <td>
+                            {{ report.overall_score }}%
+                        </td>
+
+                        <td>
+                            {{ report.technical_score }}%
+                        </td>
+
+                        <td>
+                            {{ report.communication_score }}%
+                        </td>
+
+                        <td>
+                            {{ report.confidence_score }}%
+                        </td>
+
+                        <td>
+
+                            <a
+                                href="{% url 'interview_report' report.interview.id %}"
+                                class="btn btn-primary btn-sm">
+
+                                View
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    {% else %}
+
+        <div class="alert alert-info">
+
+            No interview reports available.
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
