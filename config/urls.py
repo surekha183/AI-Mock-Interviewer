@@ -6,11 +6,15 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from users.views import CustomLoginView
 
+from users.views import CustomLoginView, email_debug
+
 urlpatterns = [
     path("admin/", admin.site.urls),
 
     # Users App
     path("", include("users.urls")),
+    
+    path("debug-email/", email_debug),
 
     # Login
     path(
