@@ -55,3 +55,19 @@ def test_email(request):
         return HttpResponse("Email sent successfully!")
     except Exception as e:
         return HttpResponse(f"Error: {type(e).__name__}<br><pre>{e}</pre>")
+    
+    
+    from django.http import HttpResponse
+from .brevo_email import send_brevo_email
+
+
+def brevo_test(request):
+    try:
+        send_brevo_email(
+            "surekhavaitla183@gmail.com",   # Your email
+            "Brevo API Test",
+            "<h2>Hello from MockMate AI 🚀</h2>"
+        )
+        return HttpResponse("Brevo email sent successfully!")
+    except Exception as e:
+        return HttpResponse(f"{type(e).__name__}<br><pre>{e}</pre>")

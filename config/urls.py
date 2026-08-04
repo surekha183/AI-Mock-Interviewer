@@ -8,9 +8,19 @@ from users.views import CustomLoginView
 
 from users.views import CustomLoginView, email_debug, test_email
 
+from users.views import (
+    CustomLoginView,
+    email_debug,
+    test_email,
+    brevo_test,
+)
+
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    
+    path("brevo-test/", brevo_test),
     
     path("debug-email/", email_debug),
     
