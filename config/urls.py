@@ -10,11 +10,13 @@ from users.views import CustomLoginView, email_debug
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    
+    path("debug-email/", email_debug),
 
     # Users App
     path("", include("users.urls")),
     
-    path("debug-email/", email_debug),
+    
 
     # Login
     path(
