@@ -37,3 +37,21 @@ def email_debug(request):
     EMAIL_HOST_USER: {settings.EMAIL_HOST_USER}<br>
     DEFAULT_FROM_EMAIL: {settings.DEFAULT_FROM_EMAIL}<br>
     """)
+    
+    
+from django.core.mail import send_mail
+from django.http import HttpResponse
+from django.conf import settings
+
+def test_email(request):
+    try:
+        send_mail(
+            "Render SMTP Test",
+            "This email was sent from Render.",
+            settings.DEFAULT_FROM_EMAIL,
+            ["surekhavaitla183@gmail.com"],  # Replace with your email
+            fail_silently=False,
+        )
+        return HttpResponse("Email sent successfully!")
+    except Exception as e:
+        return HttpResponse(f"Error: {type(e).__name__}<br><pre>{e}</pre>")
