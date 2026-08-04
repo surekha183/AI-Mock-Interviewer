@@ -4,9 +4,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from django.contrib.auth import views as auth_views
-from users.views import CustomLoginView
-
-from users.views import CustomLoginView, email_debug, test_email
 
 from users.views import (
     CustomLoginView,
