@@ -12,21 +12,19 @@ from users.views import (
     brevo_test,
 )
 
+from users.forms import BrevoPasswordResetForm
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    
-    path("brevo-test/", brevo_test),
-    
+
+    # Debug Routes
     path("debug-email/", email_debug),
-    
     path("test-email/", test_email),
+    path("brevo-test/", brevo_test),
 
     # Users App
     path("", include("users.urls")),
-    
-    
 
     # Login
     path(
@@ -42,13 +40,12 @@ urlpatterns = [
         name="logout",
     ),
 
-    # Password Reset
+    # Password Reset (Using Brevo API)
     path(
         "accounts/password_reset/",
         auth_views.PasswordResetView.as_view(
+            form_class=BrevoPasswordResetForm,
             template_name="registration/password_reset_form.html",
-            email_template_name="registration/password_reset_email.html",
-            subject_template_name="registration/password_reset_subject.txt",
         ),
         name="password_reset",
     ),
