@@ -15,6 +15,8 @@ from .forms import InterviewForm
 
 from django.db.models import Avg, Max
 
+from .roles import INTERVIEW_ROLES
+
 
 from .models import (
     InterviewSession,
@@ -81,7 +83,8 @@ def role_selection(request):
         request,
         "interview/role_selection.html",
         {
-            "form": form
+            "form": form,
+            "roles": INTERVIEW_ROLES,
         }
     )
 

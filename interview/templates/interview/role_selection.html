@@ -15,9 +15,7 @@ Start Interview
             <div class="card shadow">
 
                 <div class="card-header bg-primary text-white">
-
                     <h3>Select Interview</h3>
-
                 </div>
 
                 <div class="card-body">
@@ -26,27 +24,41 @@ Start Interview
 
                         {% csrf_token %}
 
+                        <!-- Domain -->
                         <div class="mb-3">
 
-                            {{ form.role.label }}
+                            <label class="form-label">
+                                Domain
+                            </label>
+
+                            {{ form.domain }}
+
+                        </div>
+
+                        <!-- Role -->
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Role
+                            </label>
 
                             {{ form.role }}
 
                         </div>
 
+                        <!-- Experience -->
                         <div class="mb-3">
 
-                            {{ form.experience.label }}
+                            <label class="form-label">
+                                Experience
+                            </label>
 
                             {{ form.experience }}
 
                         </div>
 
-                        <button
-                            class="btn btn-success w-100">
-
+                        <button class="btn btn-success w-100">
                             Generate AI Questions
-
                         </button>
 
                     </form>
@@ -60,5 +72,42 @@ Start Interview
     </div>
 
 </div>
+
+<!-- Roles Dictionary -->
+{{ roles|json_script:"roles-data" }}
+
+<script>
+
+const roles = JSON.parse(
+    document.getElementById("roles-data").textContent
+);
+
+const domainDropdown = document.getElementById("domain");
+const roleDropdown = document.getElementById("role");
+
+function loadRoles() {
+
+    const selectedDomain = domainDropdown.value;
+
+    roleDropdown.innerHTML = "";
+
+    roles[selectedDomain].forEach(function(role) {
+
+        const option = document.createElement("option");
+
+        option.value = role;
+        option.textContent = role;
+
+        roleDropdown.appendChild(option);
+
+    });
+
+}
+
+domainDropdown.addEventListener("change", loadRoles);
+
+loadRoles();
+
+</script>
 
 {% endblock %}

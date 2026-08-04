@@ -8,8 +8,12 @@ from django.contrib.auth import views as auth_views
 from users.views import CustomLoginView
 from users.forms import BrevoPasswordResetForm
 
+
+
 urlpatterns = [
     path("admin/", admin.site.urls),
+    
+
 
     # Users App
     path("", include("users.urls")),
