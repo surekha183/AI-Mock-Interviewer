@@ -5,23 +5,11 @@ from django.conf.urls.static import static
 
 from django.contrib.auth import views as auth_views
 
-from users.views import (
-    CustomLoginView,
-    email_debug,
-    test_email,
-    brevo_test,
-)
-
+from users.views import CustomLoginView
 from users.forms import BrevoPasswordResetForm
-
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-
-    # Debug Routes
-    path("debug-email/", email_debug),
-    path("test-email/", test_email),
-    path("brevo-test/", brevo_test),
 
     # Users App
     path("", include("users.urls")),

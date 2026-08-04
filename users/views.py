@@ -1,11 +1,7 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.conf import settings
-from django.core.mail import send_mail
 from django.contrib.auth.views import LoginView
 
 from .forms import RegisterForm, EmailLoginForm
-from .brevo_email import send_brevo_email
 
 
 class CustomLoginView(LoginView):
@@ -27,39 +23,3 @@ def register(request):
         form = RegisterForm()
 
     return render(request, "users/register.html", {"form": form})
-
-
-def email_debug(request):
-    return HttpResponse(f"""
-    EMAIL_HOST: {settings.EMAIL_HOST}<br>
-    EMAIL_PORT: {settings.EMAIL_PORT}<br>
-    EMAIL_USE_TLS: {settings.EMAIL_USE_TLS}<br>
-    EMAIL_HOST_USER: {settings.EMAIL_HOST_USER}<br>
-    DEFAULT_FROM_EMAIL: {settings.DEFAULT_FROM_EMAIL}<br>
-    """)
-
-
-def test_email(request):
-    try:
-        send_mail(
-            "Render SMTP Test",
-            "This email was sent from Render.",
-            settings.DEFAULT_FROM_EMAIL,
-            ["surekhavaitla183@gmail.com"],
-            fail_silently=False,
-        )
-        return HttpResponse("Email sent successfully!")
-    except Exception as e:
-        return HttpResponse(f"Error: {type(e).__name__}<br><pre>{e}</pre>")
-
-
-def brevo_test(request):
-    try:
-        send_brevo_email(
-            "surekhavaitla183@gmail.com",
-            "Brevo API Test",
-            "<h2>Hello from MockMate AI 🚀</h2>",
-        )
-        return HttpResponse("Brevo email sent successfully!")
-    except Exception as e:
-        return HttpResponse(f"Error: {type(e).__name__}<br><pre>{e}</pre>")
