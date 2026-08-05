@@ -15,10 +15,52 @@ from .brevo_email import send_brevo_email
 class RegisterForm(UserCreationForm):
 
     email = forms.EmailField(
-        widget=forms.EmailInput(attrs={
-            "class": "form-control"
-        })
+        widget=forms.EmailInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Enter your email"
+            }
+        )
     )
+
+    class Meta:
+        model = User
+        fields = [
+            "username",
+            "email",
+            "password1",
+            "password2",
+        ]
+
+    def __init__(self, *args, **kwargs):
+
+        super().__init__(*args, **kwargs)
+
+        self.fields["username"].widget.attrs.update({
+            "class": "form-control",
+            "placeholder": "Choose a username",
+        })
+
+        self.fields["password1"].widget.attrs.update({
+            "class": "form-control",
+            "placeholder": "Enter password",
+        })
+
+        self.fields["password2"].widget.attrs.update({
+            "class": "form-control",
+            "placeholder": "Confirm password",
+        })
+
+    def clean_email(self):
+
+        email = self.cleaned_data["email"]
+
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError(
+                "An account with this email already exists."
+            )
+
+        return email
 
     class Meta:
         model = User

@@ -22,7 +22,111 @@ Register
 
                     {% csrf_token %}
 
-                    {{ form.as_p }}
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+
+                    <!-- Username -->
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Username
+                        </label>
+
+                        {{ form.username }}
+
+                        {% if form.username.errors %}
+                            <div class="alert alert-danger mt-2 py-2">
+                                {{ form.username.errors }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Email
+                        </label>
+
+                        {{ form.email }}
+
+                        {% if form.email.errors %}
+                            <div class="alert alert-danger mt-2 py-2">
+                                {{ form.email.errors }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Password
+                        </label>
+
+                        <div class="input-group">
+
+                            {{ form.password1 }}
+
+                            <button
+                                class="btn btn-outline-secondary"
+                                type="button"
+                                id="togglePassword1">
+
+                                👁
+
+                            </button>
+
+                        </div>
+
+                        {% if form.password1.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.password1.help_text|safe }}
+                            </small>
+                        {% endif %}
+
+                        {% if form.password1.errors %}
+                            <div class="alert alert-danger mt-2 py-2">
+                                {{ form.password1.errors }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Confirm Password
+                        </label>
+
+                        <div class="input-group">
+
+                            {{ form.password2 }}
+
+                            <button
+                                class="btn btn-outline-secondary"
+                                type="button"
+                                id="togglePassword2">
+
+                                👁
+
+                            </button>
+
+                        </div>
+
+                        {% if form.password2.errors %}
+                            <div class="alert alert-danger mt-2 py-2">
+                                {{ form.password2.errors }}
+                            </div>
+                        {% endif %}
+
+                    </div>
 
                     <button
                         type="submit"
@@ -57,5 +161,37 @@ Register
     </div>
 
 </div>
+
+<script>
+
+document.getElementById("togglePassword1").addEventListener("click", function () {
+
+    const password = document.getElementById("id_password1");
+
+    if (password.type === "password") {
+        password.type = "text";
+        this.textContent = "🙈";
+    } else {
+        password.type = "password";
+        this.textContent = "👁";
+    }
+
+});
+
+document.getElementById("togglePassword2").addEventListener("click", function () {
+
+    const password = document.getElementById("id_password2");
+
+    if (password.type === "password") {
+        password.type = "text";
+        this.textContent = "🙈";
+    } else {
+        password.type = "password";
+        this.textContent = "👁";
+    }
+
+});
+
+</script>
 
 {% endblock %}
