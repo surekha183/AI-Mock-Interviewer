@@ -3,6 +3,7 @@ import json
 from django.conf import settings
 from groq import Groq
 
+
 client = Groq(
     api_key=settings.GROQ_API_KEY
 )
@@ -38,7 +39,9 @@ Resume:
     try:
 
         response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+
+            model="openai/gpt-oss-120b",
+
             messages=[
                 {
                     "role": "system",
@@ -49,7 +52,9 @@ Resume:
                     "content": prompt
                 }
             ],
+
             temperature=0,
+
             max_tokens=1500
         )
 
@@ -63,6 +68,7 @@ Resume:
 
         # Remove markdown if the model returns it
         if result.startswith("```"):
+
             result = result.replace("```json", "")
             result = result.replace("```", "")
             result = result.strip()
